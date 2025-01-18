@@ -1,0 +1,3 @@
+[submodule "unitree_driver/src/json"]
+	path = unitree_driver/src/json
+	url = https://github.com/nlohmann/json.git
