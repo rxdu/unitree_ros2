@@ -1,20 +1,21 @@
 <?xml version="1.0"?>
 <?xml-model href="" schematypens=""?>
 <package format="3">
-  <name>unitree_ros2_example</name>
+  <name>unitree_driver</name>
   <version>0.0.0</version>
-  <description>Uniree ros2 example</description>
+  <description>Unitree ROS2 client</description>
   <maintainer email="unitree@unitree.com">Unitree</maintainer>
   <license>BSD 3-Clause License</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
-  <depend>unitree_go</depend>
-  <depend>unitree_hg</depend>
-  <depend>unitree_api</depend>
   <depend>rclcpp</depend>
   <depend>std_msgs</depend>
   <depend>rosbag2_cpp</depend>
+
+  <depend>unitree_go</depend>
+  <depend>unitree_hg</depend>
+  <depend>unitree_api</depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
