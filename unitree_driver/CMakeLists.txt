@@ -31,6 +31,7 @@ endforeach ()
 
 # add targets
 add_library(${PROJECT_NAME}
+    src/motor_utils.cpp
     src/motor_crc.cpp
     src/motor_crc_hg.cpp
     src/ros2_sport_client.cpp)

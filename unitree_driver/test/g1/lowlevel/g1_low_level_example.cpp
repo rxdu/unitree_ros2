@@ -2,8 +2,9 @@
  * This example demonstrates how to use ROS2 to send low-level motor commands of
  *unitree g1 robot
  **/
-#include "unitree_driver/motor_crc_hg.h"
+
 #include "rclcpp/rclcpp.hpp"
+#include "unitree_driver/motor_utils.hpp"
 #include "unitree_hg/msg/low_cmd.hpp"
 #include "unitree_hg/msg/low_state.hpp"
 #include "unitree_hg/msg/motor_cmd.hpp"
@@ -162,7 +163,7 @@ class low_level_cmd_sender : public rclcpp::Node {
       low_command.motor_cmd[G1JointIndex::RightWristRoll].kd = 1;
       low_command.motor_cmd[G1JointIndex::RightWristRoll].tau = 0;
     }
-    get_crc(low_command);
+    unitree::motor_utils::CalculateAndSetHGCrc(low_command);
     lowcmd_publisher_->publish(low_command);  // Publish lowcmd message
   }
 

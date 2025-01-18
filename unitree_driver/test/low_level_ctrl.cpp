@@ -4,10 +4,12 @@
  **/
 
 #include "rclcpp/rclcpp.hpp"
-#include "unitree_driver/motor_crc.h"
+#include "unitree_driver/motor_utils.hpp"
 #include "unitree_go/msg/bms_cmd.hpp"
 #include "unitree_go/msg/low_cmd.hpp"
 #include "unitree_go/msg/motor_cmd.hpp"
+
+using namespace unitree::motor_utils;
 
 // Create a low_level_cmd_sender class for low state receive
 class low_level_cmd_sender : public rclcpp::Node {
@@ -49,7 +51,7 @@ class low_level_cmd_sender : public rclcpp::Node {
     cmd_msg.motor_cmd[RL_0].kd = 1;   // Poinstion(rad) control kd gain
     cmd_msg.motor_cmd[RL_0].tau = 0;  // Feedforward toque 1N.m
 
-    get_crc(cmd_msg);  // Check motor cmd crc
+    unitree::motor_utils::CalculateAndSetGoCrc(cmd_msg);  // Check motor cmd crc
 
     cmd_puber->publish(cmd_msg);  // Publish lowcmd message
   }
