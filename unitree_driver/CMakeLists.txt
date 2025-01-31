@@ -22,6 +22,7 @@ find_package(ament_cmake REQUIRED)
 set(dependencies
     rclcpp
     std_msgs
+    sensor_msgs
     unitree_go
     unitree_hg
     unitree_api)
@@ -31,6 +32,7 @@ endforeach ()
 
 # add targets
 add_library(${PROJECT_NAME}
+    src/sports_mode_client.cpp
     src/motor_utils.cpp
     src/motor_crc.cpp
     src/motor_crc_hg.cpp
@@ -42,6 +44,9 @@ target_include_directories(${PROJECT_NAME} PUBLIC
     "$<INSTALL_INTERFACE:include/${PROJECT_NAME}>"
     PRIVATE src)
 
+add_executable(sports_mode_client_node src/sports_mode_client_node.cpp)
+target_link_libraries(sports_mode_client_node ${PROJECT_NAME})
+
 ## install and export configuration
 install(TARGETS ${PROJECT_NAME}
     EXPORT export_${PROJECT_NAME}
@@ -49,8 +54,14 @@ install(TARGETS ${PROJECT_NAME}
     ARCHIVE DESTINATION lib
     RUNTIME DESTINATION bin)
 
+install(TARGETS sports_mode_client_node
+    DESTINATION lib/${PROJECT_NAME})
+
 install(DIRECTORY include/
     DESTINATION include/${PROJECT_NAME})
+
+install(DIRECTORY launch
+    DESTINATION share/${PROJECT_NAME})
 
 add_subdirectory(test)
 
